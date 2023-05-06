@@ -18,8 +18,8 @@ export class VaccineCertificateController {
   ) {}
 
   @Post()
-  create(@Body() createVaccineCertificateDto: CreateVaccineCertificateDto) {
-    return this.vaccineCertificateService.create(createVaccineCertificateDto);
+  create(@Body() payload: CreateVaccineCertificateDto) {
+    return this.vaccineCertificateService.create(payload);
   }
 
   @Get()
@@ -34,13 +34,10 @@ export class VaccineCertificateController {
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
-    @Body() updateVaccineCertificateDto: UpdateVaccineCertificateDto,
+    @Param('id') _id: string,
+    @Body() payload: UpdateVaccineCertificateDto,
   ) {
-    return this.vaccineCertificateService.update(
-      +id,
-      updateVaccineCertificateDto,
-    );
+    return this.vaccineCertificateService.update(_id, payload);
   }
 
   @Delete(':id')

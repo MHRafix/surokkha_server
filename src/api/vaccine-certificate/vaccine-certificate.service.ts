@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+} from '@nestjs/common';
 import { CreateVaccineCertificateDto } from './dto/create-vaccine-certificate.dto';
 import { UpdateVaccineCertificateDto } from './dto/update-vaccine-certificate.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -17,15 +21,15 @@ export class VaccineCertificateService {
 
   /**
    * create vaccine certificate
-   * @param payload vaccine certificate documents
+   * @param payload:CreateVaccineCertificateDto - vaccine certificate payload
    * @returns
    */
   async create(payload: CreateVaccineCertificateDto) {
     try {
       await this.vaccineCertificateModel.create(payload);
-      return true;
+      return { isCreated: true };
     } catch (err) {
-      return false;
+      return new ForbiddenException();
     }
   }
 
@@ -38,8 +42,8 @@ export class VaccineCertificateService {
   }
 
   /**
-   * find by id
-   * @param _id id
+   * find single certificate by id
+   * @param _id:string - certificate id
    * @returns
    */
   findOne(_id: string) {
@@ -48,13 +52,24 @@ export class VaccineCertificateService {
     });
   }
 
-  update(id: number, updateVaccineCertificateDto: UpdateVaccineCertificateDto) {
-    return `This action updates a #${id} vaccineCertificate`;
+  /**
+   * update ceritifcate details
+   * @param _id:string - certificate id
+   * @param payload - certificate updated paylaod
+   * @returns
+   */
+  async update(_id: string, payload: UpdateVaccineCertificateDto) {
+    try {
+      await this.vaccineCertificateModel.findByIdAndUpdate({ _id }, payload);
+      return { isUpdated: true };
+    } catch (err) {
+      return new ForbiddenException();
+    }
   }
 
   /**
-   * delete certificate
-   * @param _id certificate id
+   * delete certificate service
+   * @param _id:string - certificate id
    * @returns
    */
   async remove(_id: string) {
@@ -62,9 +77,9 @@ export class VaccineCertificateService {
       await this.vaccineCertificateModel.deleteOne({
         _id,
       });
-      return true;
+      return { isDeleted: true };
     } catch (err) {
-      return false;
+      return new ForbiddenException();
     }
   }
 }

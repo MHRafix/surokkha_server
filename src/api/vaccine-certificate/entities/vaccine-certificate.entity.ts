@@ -1,10 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { ValidateNested } from 'class-validator';
-import { TakenDosesDto } from '../dto/create-vaccine-certificate.dto';
 
 export type VaccineCertificateDocument = VaccineCertificate & Document;
 
-@Schema({ timestamps: true })
 export class BeneficiaryDetailsSchema {
   @Prop({ required: true })
   certificateNo: string;
@@ -28,7 +25,6 @@ export class BeneficiaryDetailsSchema {
   gender: string;
 }
 
-@Schema({ timestamps: true })
 export class TakenDosesSchema {
   @Prop({ required: true })
   dateOfVaccination: string;
@@ -37,10 +33,8 @@ export class TakenDosesSchema {
   nameOfVaccine: string;
 }
 
-@Schema({ timestamps: true })
 export class VaccinationDetailsSchema {
   @Prop({ required: true })
-  // @ValidateNested(TakenDosesSchema)
   vaccineDosesDetails: TakenDosesSchema[];
 
   @Prop({ required: true })
