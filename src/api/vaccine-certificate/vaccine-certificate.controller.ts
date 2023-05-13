@@ -17,22 +17,22 @@ export class VaccineCertificateController {
     private readonly vaccineCertificateService: VaccineCertificateService,
   ) {}
 
-  @Post('/create')
+  @Post()
   create(@Body() payload: CreateVaccineCertificateDto) {
     return this.vaccineCertificateService.create(payload);
   }
 
-  @Get('/certificates')
+  @Get()
   findAll() {
     return this.vaccineCertificateService.findAll();
   }
 
-  @Get('/singleCertificate:id')
+  @Get(':id')
   findOne(@Param('id') _id: string) {
     return this.vaccineCertificateService.findOne(_id);
   }
 
-  @Patch('/updateCertificate:id')
+  @Patch(':id')
   update(
     @Param('id') _id: string,
     @Body() payload: UpdateVaccineCertificateDto,
@@ -40,7 +40,7 @@ export class VaccineCertificateController {
     return this.vaccineCertificateService.update(_id, payload);
   }
 
-  @Delete('/deleteCertificate:id')
+  @Delete(':id')
   remove(@Param('id') _id: string) {
     return this.vaccineCertificateService.remove(_id);
   }
