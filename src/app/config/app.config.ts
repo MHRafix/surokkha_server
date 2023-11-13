@@ -14,7 +14,7 @@ export default registerAs('app', () => ({
     | any other location as required by the application or its packages.
     |
     */
-  name: process.env.APP_NAME || 'SUROKKHA API',
+  name: process.env.APP_NAME || 'ANSARUL UMMAH API',
 
   /*
     |--------------------------------------------------------------------------
@@ -35,7 +35,8 @@ export default registerAs('app', () => ({
     | the framework needs to place the application's description in a notification
     | or any other location as required by the application or its packages.
     */
-  description: process.env.APP_DESC || 'Api documentation for Surokkha api',
+  description:
+    process.env.APP_DESC || 'Api documentation for Ansarul Ummah api',
 
   /*
     |--------------------------------------------------------------------------

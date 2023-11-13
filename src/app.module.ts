@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ArticleModule } from './api/article/article.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import config from './app/config';
-import { MongooseModule } from '@nestjs/mongoose';
-import { VaccineCertificateModule } from './api/vaccine-certificate/vaccine-certificate.module';
 
 @Module({
   imports: [
@@ -20,7 +20,7 @@ import { VaccineCertificateModule } from './api/vaccine-certificate/vaccine-cert
     }),
     MongooseModule.forRoot(process.env.MONGODB_CONNECTION_URI),
     // api modules here
-    VaccineCertificateModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

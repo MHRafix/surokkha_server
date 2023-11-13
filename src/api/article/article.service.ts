@@ -1,22 +1,15 @@
-import {
-  BadRequestException,
-  ForbiddenException,
-  Injectable,
-} from '@nestjs/common';
-import { CreateVaccineCertificateDto } from './dto/create-vaccine-certificate.dto';
-import { UpdateVaccineCertificateDto } from './dto/update-vaccine-certificate.dto';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import {
-  VaccineCertificate,
-  VaccineCertificateDocument,
-} from './entities/vaccine-certificate.entity';
 import { Model } from 'mongoose';
+import { CreateArticleDto } from './dto/create-article.dto';
+import { UpdateArticleDto } from './dto/update-article.dto';
+import { Article, ArticleDocument } from './entities/article.entity';
 
 @Injectable()
-export class VaccineCertificateService {
+export class ArticleService {
   constructor(
-    @InjectModel(VaccineCertificate.name)
-    private vaccineCertificateModel: Model<VaccineCertificateDocument>,
+    @InjectModel(Article.name)
+    private articleModel: Model<ArticleDocument>,
   ) {}
 
   /**
@@ -24,9 +17,9 @@ export class VaccineCertificateService {
    * @param payload:CreateVaccineCertificateDto - vaccine certificate payload
    * @returns
    */
-  async create(payload: CreateVaccineCertificateDto) {
+  async create(payload: CreateArticleDto) {
     try {
-      await this.vaccineCertificateModel.create(payload);
+      await this.articleModel.create(payload);
       return { isCreated: true };
     } catch (err) {
       return new ForbiddenException();
@@ -38,7 +31,7 @@ export class VaccineCertificateService {
    * @returns
    */
   findAll() {
-    return this.vaccineCertificateModel.find({});
+    return this.articleModel.find({});
   }
 
   /**
@@ -47,7 +40,7 @@ export class VaccineCertificateService {
    * @returns
    */
   findOne(_id: string) {
-    return this.vaccineCertificateModel.findById({
+    return this.articleModel.findById({
       _id,
     });
   }
@@ -58,9 +51,9 @@ export class VaccineCertificateService {
    * @param payload - certificate updated paylaod
    * @returns
    */
-  async update(_id: string, payload: UpdateVaccineCertificateDto) {
+  async update(_id: string, payload: UpdateArticleDto) {
     try {
-      await this.vaccineCertificateModel.findByIdAndUpdate({ _id }, payload);
+      await this.articleModel.findByIdAndUpdate({ _id }, payload);
       return { isUpdated: true };
     } catch (err) {
       return new ForbiddenException();
@@ -74,7 +67,7 @@ export class VaccineCertificateService {
    */
   async remove(_id: string) {
     try {
-      await this.vaccineCertificateModel.deleteOne({
+      await this.articleModel.deleteOne({
         _id,
       });
       return { isDeleted: true };

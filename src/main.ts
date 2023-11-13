@@ -12,10 +12,10 @@ async function bootstrap() {
 
   // default postman support
   const config = new DocumentBuilder()
-    .setTitle('SROKKHA ASIA SERVER')
-    .setDescription('The Surokkha Asia API description')
+    .setTitle('ANSARUL UMMAH SERVER')
+    .setDescription('The ANSARUL UMMAH API description')
     .setVersion('1.0')
-    .addTag('SROKKHA ASIA SERVER')
+    .addTag('ANSARUL UMMAH SERVER')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
